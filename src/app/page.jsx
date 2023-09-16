@@ -1,26 +1,26 @@
-"use client";
+'use client';
 
-import { signOut, useSession } from "next-auth/react";
-import useSpotify from "./hooks/useSpotify";
-import { useEffect, useState } from "react";
-import Image from "next/image";
+import { signOut, useSession } from 'next-auth/react';
+import { useEffect, useState } from 'react';
+import useSpotify from '@hooks/useSpotify';
+import Image from 'next/image';
 
 export default function Home() {
   const spotifyApi = useSpotify();
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
   const [topSongs, setTopSongs] = useState([]);
   const [topArtists, setTopArtists] = useState([]);
 
   useEffect(() => {
     if (spotifyApi.getAccessToken()) {
       spotifyApi
-        .getMyTopTracks({ time_range: "short_term", limit: 5 })
+        .getMyTopTracks({ time_range: 'short_term', limit: 5 })
         .then((data) => {
           setTopSongs(data.body.items);
         });
 
       spotifyApi
-        .getMyTopArtists({ time_range: "short_term", limit: 5 })
+        .getMyTopArtists({ time_range: 'short_term', limit: 5 })
         .then((data) => {
           setTopArtists(data.body.items);
         });

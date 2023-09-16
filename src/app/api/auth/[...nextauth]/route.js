@@ -1,6 +1,6 @@
-import spotifyApi, { LOGIN_URL } from "@/app/lib/spotify";
-import SpotifyProvider from "next-auth/providers/spotify";
-import NextAuth from "next-auth";
+import spotifyApi, { LOGIN_URL } from '@lib/spotify';
+import SpotifyProvider from 'next-auth/providers/spotify';
+import NextAuth from 'next-auth';
 
 async function refreshAccessToken(token) {
   try {
@@ -19,7 +19,7 @@ async function refreshAccessToken(token) {
     console.error(error);
     return {
       ...token,
-      error: "RefreshAccessTokenError",
+      error: 'RefreshAccessTokenError',
     };
   }
 }
@@ -34,7 +34,7 @@ export const authOptions = {
   ],
   secret: process.env.JWT_SECRET,
   pages: {
-    signIn: "/login",
+    signIn: '/login',
   },
 
   callbacks: {

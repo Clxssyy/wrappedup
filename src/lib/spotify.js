@@ -1,11 +1,11 @@
-import SpotifyWebApi from "spotify-web-api-node";
+import SpotifyWebApi from 'spotify-web-api-node';
 
 const scopes = [
-  "user-read-private",
-  "user-read-email",
-  "user-read-recently-played",
-  "user-top-read",
-].join(",");
+  'user-read-private',
+  'user-read-email',
+  'user-read-recently-played',
+  'user-top-read',
+].join(',');
 
 const params = { scope: scopes };
 
