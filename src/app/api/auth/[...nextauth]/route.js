@@ -1,21 +1,22 @@
 import spotifyApi, { LOGIN_URL } from "@/app/lib/spotify";
-import NextAuth from "next-auth";
 import SpotifyProvider from "next-auth/providers/spotify";
+import NextAuth from "next-auth";
 
 async function refreshAccessToken(token) {
   try {
-    spotifyApi.setRefreshToken(token.refreshToken);
     spotifyApi.setAccessToken(token.accessToken);
+    spotifyApi.setRefreshToken(token.refreshToken);
 
-    const data = await spotifyApi.refreshAccessToken();
+    const { body: refeshedToken } = await spotifyApi.refreshAccessToken();
 
     return {
       ...token,
-      accessToken: data.access_token,
-      accessTokenExpires: Date.now() + data.expires_in * 1000,
-      refreshToken: data.refresh_token ?? token.refreshToken, // Fall back to old refresh token
+      accessToken: refeshedToken.access_token,
+      accessTokenExpires: Date.now() + refeshedToken.expires_in * 1000,
+      refreshToken: refeshedToken.refresh_token ?? token.refreshToken, // Fall back to old refresh token
     };
   } catch (error) {
+    console.error(error);
     return {
       ...token,
       error: "RefreshAccessTokenError",
@@ -37,24 +38,15 @@ export const authOptions = {
   },
 
   callbacks: {
-    async session({ session, token }) {
-      if (token) {
-        session.user.accessToken = token.accessToken;
-        session.user.refreshToken = token.refreshToken;
-        session.user.username = token.username;
-      }
-
-      return session;
-    },
-    async jwt({ token, user, account }) {
+    async jwt({ token, account, user }) {
       // Initial sign in
       if (account && user) {
         return {
           ...token,
           accessToken: account.access_token,
-          accessTokenExpires: Date.now() + account.expires_in * 1000,
           refreshToken: account.refresh_token,
           username: account.providerAccountId,
+          accessTokenExpires: Date.now() + account.expires_in * 1000,
         };
       }
 
@@ -64,7 +56,14 @@ export const authOptions = {
       }
 
       // Access token has expired, try to update it
-      return refreshAccessToken(token);
+      return await refreshAccessToken(token);
+    },
+    async session({ session, token }) {
+      session.user.accessToken = token.accessToken;
+      session.user.refreshToken = token.refreshToken;
+      session.user.username = token.username;
+
+      return session;
     },
   },
 };
