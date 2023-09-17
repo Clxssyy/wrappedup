@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.spotify-green {
+  color: #1db954;
+}
+
 body {
   @apply max-h-screen h-screen flex flex-col;
 }

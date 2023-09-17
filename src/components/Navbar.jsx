@@ -7,11 +7,11 @@ const Navbar = () => {
 
   if (session) {
     return (
-      <nav className='p-4 bg-zinc-700 text-white place-items-center'>
+      <nav className='p-4 bg-zinc-800 text-white place-items-center'>
         <div className='flex justify-between place-items-center'>
           <p className='text-2xl font-bold'>
             Wrapped
-            <span className='text-[#1DB954]'>Up</span>
+            <span className='spotify-green'>Up</span>
           </p>
           <button onClick={() => signOut()}>Sign out</button>
         </div>
@@ -19,11 +19,11 @@ const Navbar = () => {
     );
   } else {
     return (
-      <nav className='p-4 bg-zinc-700 text-white place-items-center'>
+      <nav className='p-4 bg-zinc-800 text-white place-items-center'>
         <div className='flex justify-between place-items-center'>
           <p className='text-2xl font-bold'>
             Wrapped
-            <span className='text-[#1DB954]'>Up</span>
+            <span className='spotify-green'>Up</span>
           </p>
           <a href='/login'>Login</a>
         </div>
