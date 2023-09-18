@@ -1,6 +1,7 @@
 'use client';
 
 import { signOut, useSession } from 'next-auth/react';
+import { BsBoxArrowRight } from 'react-icons/bs';
 
 const Navbar = () => {
   const { data: session } = useSession();
@@ -20,7 +21,12 @@ const Navbar = () => {
           </div>
         </div>
         <div className='p-4'>
-          <button onClick={() => signOut()}>Sign out</button>
+          <button
+            onClick={() => signOut()}
+            className='rounded-full hover:bg-zinc-400 hover:opacity-50 text-white p-2'
+          >
+            <BsBoxArrowRight />
+          </button>
         </div>
       </nav>
     );

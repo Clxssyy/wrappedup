@@ -3,6 +3,7 @@
 import useSpotify from '@/hooks/useSpotify';
 import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
+import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 
 export default function Songs() {
   const spotifyApi = useSpotify();
@@ -21,7 +22,7 @@ export default function Songs() {
   return (
     <section className='bg-zinc-900 grow'>
       <div className='flex flex-col p-4 gap-2 justify-center place-items-center'>
-        <div className='flex gap-2'>
+        <div className='flex gap-4 place-items-center'>
           <button
             onClick={() => {
               setPage(() => {
@@ -29,18 +30,18 @@ export default function Songs() {
                 else return page - 1;
               });
             }}
-            className='rounded-full bg-zinc-400'
+            className='rounded-full hover:bg-zinc-400 hover:opacity-50 text-white p-2'
           >
-            prev
+            <BsChevronLeft />
           </button>
-          <h2 className='text-white'>Page</h2>
+          <h2 className='text-white text-m font-bold'>Page</h2>
           <button
             onClick={() => {
               setPage(page + 1);
             }}
-            className='rounded-full bg-zinc-400'
+            className='rounded-full hover:bg-zinc-400 hover:opacity-50 text-white p-2'
           >
-            next
+            <BsChevronRight />
           </button>
         </div>
         <div className='w-full'>
