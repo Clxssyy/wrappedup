@@ -6,6 +6,32 @@
   color: #1db954;
 }
 
+#linkContainer a span {
+  @apply hidden;
+}
+
+#linkContainer a:hover span {
+  @apply block;
+}
+
+.customUnderline {
+  background-color: #1db954;
+  @apply rounded-full absolute w-8 h-1
+    bottom-0 left-0 right-0 mx-auto -mb-1;
+}
+
+.activePage {
+  @apply spotify-green;
+}
+
+#linkContainer .activePage span {
+  @apply block;
+}
+
+#linkContainer .activePage:hover span {
+  @apply scale-105;
+}
+
 body {
   @apply max-h-screen h-screen flex flex-col;
 }

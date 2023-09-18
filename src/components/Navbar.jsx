@@ -1,10 +1,13 @@
 'use client';
 
 import { signOut, useSession } from 'next-auth/react';
+import { usePathname } from 'next/navigation';
+import Link from 'next/link';
 import { BsBoxArrowRight } from 'react-icons/bs';
 
 const Navbar = () => {
   const { data: session } = useSession();
+  const currentPage = usePathname();
 
   if (session) {
     return (
@@ -15,9 +18,28 @@ const Navbar = () => {
             <span className='spotify-green'>Up</span>
           </h1>
         </div>
-        <div className='grow flex justify-center p-4'>
-          <div className='h-full'>
-            <a href='/songs'>Songs</a>
+        <div className='grow p-4'>
+          <div id='linkContainer' className='flex gap-2'>
+            <Link
+              href='/songs'
+              className={
+                currentPage === '/songs' ? 'activePage relative' : 'relative'
+              }
+            >
+              Songs
+              <span className='customUnderline'></span>
+            </Link>
+            <Link
+              href='/playlists'
+              className={
+                currentPage === '/playlists'
+                  ? 'activePage relative'
+                  : 'relative'
+              }
+            >
+              Playlists
+              <span className='customUnderline'></span>
+            </Link>
           </div>
         </div>
         <div className='p-4'>
@@ -38,7 +60,7 @@ const Navbar = () => {
             Wrapped
             <span className='spotify-green'>Up</span>
           </p>
-          <a href='/login'>Login</a>
+          <Link href='/login'>Login</Link>
         </div>
       </nav>
     );
