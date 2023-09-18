@@ -7,15 +7,19 @@ const Navbar = () => {
 
   if (session) {
     return (
-      <nav className='p-4 bg-zinc-800 text-white place-items-center'>
-        <div className='flex justify-between place-items-center'>
+      <nav className='bg-zinc-800 text-white flex place-items-center'>
+        <div className='p-4'>
           <h1 className='text-2xl font-bold'>
             Wrapped
             <span className='spotify-green'>Up</span>
           </h1>
-          <div>
+        </div>
+        <div className='grow flex justify-center p-4'>
+          <div className='h-full'>
             <a href='/songs'>Songs</a>
           </div>
+        </div>
+        <div className='p-4'>
           <button onClick={() => signOut()}>Sign out</button>
         </div>
       </nav>
