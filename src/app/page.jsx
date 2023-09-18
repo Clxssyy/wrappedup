@@ -24,6 +24,10 @@ export default function Home() {
         .then((data) => {
           setTopArtists(data.body.items);
         });
+
+      spotifyApi.getMySavedTracks().then((data) => {
+        setSongs(data.body.items);
+      });
     }
   }, [session, spotifyApi]);
 

@@ -9,10 +9,13 @@ const Navbar = () => {
     return (
       <nav className='p-4 bg-zinc-800 text-white place-items-center'>
         <div className='flex justify-between place-items-center'>
-          <p className='text-2xl font-bold'>
+          <h1 className='text-2xl font-bold'>
             Wrapped
             <span className='spotify-green'>Up</span>
-          </p>
+          </h1>
+          <div>
+            <a href='/songs'>Songs</a>
+          </div>
           <button onClick={() => signOut()}>Sign out</button>
         </div>
       </nav>
