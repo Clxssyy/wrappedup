@@ -5,6 +5,7 @@ import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 import {
   BsChevronDoubleLeft,
+  BsChevronDoubleRight,
   BsChevronLeft,
   BsChevronRight,
 } from 'react-icons/bs';
@@ -57,15 +58,24 @@ export default function Songs() {
             </button>
           </div>
           <h2 className='text-white text-m font-bold'>Page</h2>
-          <button
-            onClick={() => {
-              setPage(page + 1);
-            }}
-            className='rounded-full hover:bg-zinc-400 hover:opacity-50 text-white p-2'
-            aria-label='Next Page'
-          >
-            <BsChevronRight />
-          </button>
+          <div>
+            <button
+              onClick={() => {
+                setPage(page + 1);
+              }}
+              className='rounded-full hover:bg-zinc-400 hover:opacity-50 text-white p-2'
+              aria-label='Next Page'
+            >
+              <BsChevronRight />
+            </button>
+            <button
+              onClick={() => setPage(page + 2)}
+              className='rounded-full hover:bg-zinc-400 hover:opacity-50 text-white p-2'
+              aria-label='Skip a page'
+            >
+              <BsChevronDoubleRight />
+            </button>
+          </div>
         </div>
         <div className='w-full'>
           {songs.map((song) => (
