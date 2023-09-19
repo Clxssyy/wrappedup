@@ -13,10 +13,10 @@ const Navbar = () => {
     return (
       <nav className='bg-zinc-800 text-white flex place-items-center'>
         <div className='p-4'>
-          <h1 className='text-2xl font-bold'>
+          <Link href='/' className='text-2xl font-bold'>
             Wrapped
             <span className='spotify-green'>Up</span>
-          </h1>
+          </Link>
         </div>
         <div className='grow p-4'>
           <div id='linkContainer' className='flex gap-2'>
