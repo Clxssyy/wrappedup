@@ -33,12 +33,13 @@ export default function Songs() {
         <div className='flex gap-4 place-items-center'>
           <div>
             <button
+              onClick={() => setPage(0)}
               className={
                 page !== 0
                   ? 'rounded-full hover:bg-zinc-400 hover:opacity-50 text-white p-2'
                   : 'hidden'
               }
-              onClick={() => setPage(0)}
+              aria-label='First Page'
             >
               <BsChevronDoubleLeft />
             </button>
@@ -50,6 +51,7 @@ export default function Songs() {
                 });
               }}
               className='rounded-full hover:bg-zinc-400 hover:opacity-50 text-white p-2'
+              aria-label='Previous Page'
             >
               <BsChevronLeft />
             </button>
@@ -60,6 +62,7 @@ export default function Songs() {
               setPage(page + 1);
             }}
             className='rounded-full hover:bg-zinc-400 hover:opacity-50 text-white p-2'
+            aria-label='Next Page'
           >
             <BsChevronRight />
           </button>
