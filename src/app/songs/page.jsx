@@ -14,6 +14,10 @@ export default function Songs() {
   useEffect(() => {
     if (spotifyApi.getAccessToken()) {
       spotifyApi.getMySavedTracks({ offset: page * 20 }).then((data) => {
+        if (data.body.items.length == 0) {
+          setPage(page - 1);
+          return;
+        }
         setSongs(data.body.items);
       });
     }
@@ -48,7 +52,7 @@ export default function Songs() {
           {songs.map((song) => (
             <div
               className='border-b border-black bg-zinc-800 p-2 flex gap-2 place-items-center'
-              key={song.track.name}
+              key={song.added_at + song.track.id}
             >
               <p className='text-zinc-400'>
                 {song.track.name} -{' '}
