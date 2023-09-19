@@ -46,6 +46,7 @@ const Navbar = () => {
           <button
             onClick={() => signOut()}
             className='rounded-full hover:bg-zinc-400 hover:opacity-50 text-white p-2'
+            aria-label='Sign Out'
           >
             <BsBoxArrowRight />
           </button>
