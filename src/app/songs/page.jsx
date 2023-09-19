@@ -3,7 +3,11 @@
 import useSpotify from '@/hooks/useSpotify';
 import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
-import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
+import {
+  BsChevronDoubleLeft,
+  BsChevronLeft,
+  BsChevronRight,
+} from 'react-icons/bs';
 
 export default function Songs() {
   const spotifyApi = useSpotify();
@@ -27,17 +31,29 @@ export default function Songs() {
     <section className='bg-zinc-900 grow'>
       <div className='flex flex-col p-4 gap-2 justify-center place-items-center'>
         <div className='flex gap-4 place-items-center'>
-          <button
-            onClick={() => {
-              setPage(() => {
-                if (page == 0) return 0;
-                else return page - 1;
-              });
-            }}
-            className='rounded-full hover:bg-zinc-400 hover:opacity-50 text-white p-2'
-          >
-            <BsChevronLeft />
-          </button>
+          <div>
+            <button
+              className={
+                page !== 0
+                  ? 'rounded-full hover:bg-zinc-400 hover:opacity-50 text-white p-2'
+                  : 'hidden'
+              }
+              onClick={() => setPage(0)}
+            >
+              <BsChevronDoubleLeft />
+            </button>
+            <button
+              onClick={() => {
+                setPage(() => {
+                  if (page == 0) return 0;
+                  else return page - 1;
+                });
+              }}
+              className='rounded-full hover:bg-zinc-400 hover:opacity-50 text-white p-2'
+            >
+              <BsChevronLeft />
+            </button>
+          </div>
           <h2 className='text-white text-m font-bold'>Page</h2>
           <button
             onClick={() => {
