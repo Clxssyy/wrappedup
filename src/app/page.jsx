@@ -10,26 +10,46 @@ export default function Home() {
   const { data: session } = useSession();
   const [topSongs, setTopSongs] = useState([]);
   const [topArtists, setTopArtists] = useState([]);
+  const [time_range, setTimeRange] = useState('short_term');
 
   useEffect(() => {
     if (spotifyApi.getAccessToken()) {
+      setTopArtists([]);
+      setTopSongs([]);
+
       spotifyApi
-        .getMyTopTracks({ time_range: 'short_term', limit: 5 })
+        .getMyTopTracks({ time_range: time_range, limit: 5 })
         .then((data) => {
           setTopSongs(data.body.items);
         });
 
       spotifyApi
-        .getMyTopArtists({ time_range: 'short_term', limit: 5 })
+        .getMyTopArtists({ time_range: time_range, limit: 5 })
         .then((data) => {
           setTopArtists(data.body.items);
         });
     }
-  }, [session, spotifyApi]);
+  }, [session, spotifyApi, time_range]);
 
   return (
     <>
       <section className='bg-zinc-900 grow'>
+        <div className='flex justify-center p-2 gap-2 place-items-center'>
+          <p className='font-bold text-white'>Range: </p>
+          <select
+            name='time_range_options'
+            id='time_range'
+            className='bg-zinc-800 rounded-lg p-2 text-white hover:border-green-400 active:border-green-400 border-2 border-transparent'
+            onChange={(e) => {
+              setTimeRange(e.target.value);
+            }}
+            defaultValue={time_range}
+          >
+            <option value='short_term'>Last Month</option>
+            <option value='medium_term'>Last 6 Months</option>
+            <option value='long_term'>All Time</option>
+          </select>
+        </div>
         <div className='p-2'>
           <h1 className='text-3xl font-bold text-center spotify-green'>
             Top 5 Tracks
