@@ -8,6 +8,7 @@ import { BsBoxArrowRight } from 'react-icons/bs';
 const Navbar = () => {
   const { data: session } = useSession();
   const currentPage = usePathname();
+  const name = session?.user.name;
 
   if (session) {
     return (
@@ -24,8 +25,7 @@ const Navbar = () => {
               href='/songs'
               className={
                 currentPage === '/songs' ? 'activePage relative' : 'relative'
-              }
-            >
+              }>
               Songs
               <span className='customUnderline'></span>
             </Link>
@@ -35,9 +35,12 @@ const Navbar = () => {
                 currentPage === '/playlists'
                   ? 'activePage relative'
                   : 'relative'
-              }
-            >
+              }>
               Playlists
+              <span className='customUnderline'></span>
+            </Link>
+            <Link href={'/user/' + name}>
+              Profile
               <span className='customUnderline'></span>
             </Link>
           </div>
@@ -46,8 +49,7 @@ const Navbar = () => {
           <button
             onClick={() => signOut()}
             className='rounded-full hover:bg-zinc-400 hover:opacity-50 text-white p-2'
-            aria-label='Sign Out'
-          >
+            aria-label='Sign Out'>
             <BsBoxArrowRight />
           </button>
         </div>
