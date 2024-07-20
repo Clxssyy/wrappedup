@@ -39,7 +39,13 @@ const Navbar = () => {
               Playlists
               <span className='customUnderline'></span>
             </Link>
-            <Link href={'/user/' + name}>
+            <Link
+              href={'/user/' + name}
+              className={
+                currentPage === '/user/' + name
+                  ? 'activePage relative'
+                  : 'relative'
+              }>
               Profile
               <span className='customUnderline'></span>
             </Link>
