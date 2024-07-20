@@ -27,7 +27,7 @@ export default function Playlists() {
 
   useEffect(() => {
     if (spotifyApi.getAccessToken()) {
-      spotifyApi.getUserPlaylists({ offset: page * 1 }).then((data) => {
+      spotifyApi.getUserPlaylists().then((data) => {
         if (data.body.items.length == 0) {
           setPage(page - 1);
           return;
