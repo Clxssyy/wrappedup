@@ -63,7 +63,7 @@ const Navbar = () => {
     );
   } else {
     return (
-      <nav className='p-4 bg-zinc-800 text-white place-items-center'>
+      <nav className='p-4 bg-zinc-800 text-white'>
         <div className='flex justify-between place-items-center'>
           <p className='text-2xl font-bold'>
             Wrapped

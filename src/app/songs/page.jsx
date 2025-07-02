@@ -2,6 +2,8 @@
 
 import useSpotify from '@/hooks/useSpotify';
 import { useSession } from 'next-auth/react';
+import Image from 'next/image';
+import { redirect } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import {
   BsChevronDoubleLeft,
@@ -28,6 +30,8 @@ export default function Songs() {
     }
   }, [session, spotifyApi, page]);
 
+  if (!session) redirect('/');
+
   return (
     <section className='bg-zinc-900 grow'>
       <div className='flex flex-col p-4 gap-2 justify-center place-items-center'>
@@ -40,8 +44,7 @@ export default function Songs() {
                   ? 'rounded-full hover:bg-zinc-400 hover:opacity-50 text-white p-2'
                   : 'hidden'
               }
-              aria-label='First Page'
-            >
+              aria-label='First Page'>
               <BsChevronDoubleLeft />
             </button>
             <button
@@ -52,8 +55,7 @@ export default function Songs() {
                 });
               }}
               className='rounded-full hover:bg-zinc-400 hover:opacity-50 text-white p-2'
-              aria-label='Previous Page'
-            >
+              aria-label='Previous Page'>
               <BsChevronLeft />
             </button>
           </div>
@@ -64,15 +66,13 @@ export default function Songs() {
                 setPage(page + 1);
               }}
               className='rounded-full hover:bg-zinc-400 hover:opacity-50 text-white p-2'
-              aria-label='Next Page'
-            >
+              aria-label='Next Page'>
               <BsChevronRight />
             </button>
             <button
               onClick={() => setPage(page + 2)}
               className='rounded-full hover:bg-zinc-400 hover:opacity-50 text-white p-2'
-              aria-label='Skip a page'
-            >
+              aria-label='Skip a page'>
               <BsChevronDoubleRight />
             </button>
           </div>
@@ -80,12 +80,22 @@ export default function Songs() {
         <div className='w-full'>
           {songs.map((song) => (
             <div
-              className='border-b border-black bg-zinc-800 p-2 flex gap-2 place-items-center'
-              key={song.added_at + song.track.id}
-            >
+              className='border-b border-black bg-zinc-800 p-2 flex gap-2 items-center justify-between'
+              key={song.added_at + song.track.id}>
+              <div className='flex items-center gap-2'>
+                <Image
+                  src={song.track.album.images[0].url}
+                  height={song.track.album.images[0].height}
+                  width={song.track.album.images[0].width}
+                  className='rounded w-8 h-8'
+                />
+                <p className='text-zinc-400'>
+                  {song.track.name} -{' '}
+                  <span className='text-sm'>{song.track.artists[0].name}</span>
+                </p>
+              </div>
               <p className='text-zinc-400'>
-                {song.track.name} -{' '}
-                <span className='text-sm'>{song.track.artists[0].name}</span>
+                {song.added_at.slice(0, song.added_at.indexOf('T'))}
               </p>
             </div>
           ))}

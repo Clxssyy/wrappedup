@@ -8,11 +8,12 @@ import {
 } from 'react-icons/bs';
 import useSpotify from '@/hooks/useSpotify';
 import { useSession } from 'next-auth/react';
+import Image from 'next/image';
 
 const PlaylistCard = ({ playlist }) => {
   return (
     <div className='bg-zinc-800 rounded-lg p-4'>
-      <img src='' alt={playlist.name} className='rounded-lg w-full' />
+      <Image src='' alt={playlist.name} className='rounded-lg w-full' />
       <h3 className='text-white text-lg font-bold'>{playlist.name}</h3>
       <p className='text-white text-sm'>{playlist.description}</p>
     </div>
@@ -37,10 +38,10 @@ export default function Playlists() {
     }
   }, [session, spotifyApi, page]);
 
+  if (!session) redirect('/');
+
   return (
     <section className='bg-zinc-900 grow text-white'>
-      <h1>Playlists</h1>
-
       <div className='flex flex-col p-4 gap-2 justify-center place-items-center'>
         <div className='flex gap-4 place-items-center'>
           <div>
