@@ -87,7 +87,7 @@ export default function Songs() {
                   src={song.track.album.images[0].url}
                   height={song.track.album.images[0].height}
                   width={song.track.album.images[0].width}
-                  alt={songs.track.name}
+                  alt={song.track.name}
                   className='rounded w-8 h-8'
                 />
                 <p className='text-zinc-400'>
