@@ -4,6 +4,7 @@ Spotify Wrapped inspired app!
 
 ## Features
 
-- [x] Login with Spotify
-- [x] View your top artists
-- [x] View your top tracks
+- Login with Spotify
+- View your top artists
+- View your top tracks
+- View all your tracks
