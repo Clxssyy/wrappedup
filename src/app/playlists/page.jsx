@@ -10,16 +10,6 @@ import useSpotify from '@/hooks/useSpotify';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 
-const PlaylistCard = ({ playlist }) => {
-  return (
-    <div className='bg-zinc-800 rounded-lg p-4'>
-      <Image src='' alt={playlist.name} className='rounded-lg w-full' />
-      <h3 className='text-white text-lg font-bold'>{playlist.name}</h3>
-      <p className='text-white text-sm'>{playlist.description}</p>
-    </div>
-  );
-};
-
 export default function Playlists() {
   const spotifyApi = useSpotify();
   const { data: session } = useSession();
@@ -85,7 +75,7 @@ export default function Playlists() {
             </button>
           </div>
         </div>
-        <div className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3'>
+        <div className='w-full'>
           {playlists.map((playlist) => (
             <PlaylistCard key={playlist.id} playlist={playlist} />
           ))}
@@ -94,3 +84,25 @@ export default function Playlists() {
     </section>
   );
 }
+
+const PlaylistCard = ({ playlist }) => {
+  return (
+    <div
+      className='border-b border-black bg-zinc-800 p-2 flex gap-2 items-center justify-between'
+      key={playlist.id}>
+      <div className='flex items-center gap-2'>
+        {playlist.images && (
+          <Image
+            src={playlist.images[0].url}
+            height={playlist.images[0].height}
+            width={playlist.images[0].width}
+            alt={playlist.name}
+            className='rounded w-8 h-8'
+          />
+        )}
+        <p className='text-zinc-400'>{playlist.name}</p>
+      </div>
+      <p className='text-zinc-400'>{playlist.owner.display_name}</p>
+    </div>
+  );
+};
