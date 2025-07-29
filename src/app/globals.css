@@ -31,7 +31,3 @@
 #linkContainer .activePage:hover span {
   @apply scale-105;
 }
-
-body {
-  @apply max-h-screen h-screen flex flex-col;
-}

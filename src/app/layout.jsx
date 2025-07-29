@@ -15,8 +15,10 @@ export default async function RootLayout({ children }) {
     <html lang='en'>
       <body>
         <Provider session={session}>
-          <Navbar />
-          {children}
+          <div className='bg-zinc-900 min-h-screen flex flex-col'>
+            <Navbar />
+            {children}
+          </div>
         </Provider>
       </body>
     </html>
